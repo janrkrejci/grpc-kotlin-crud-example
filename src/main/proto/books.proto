@@ -1,0 +1,37 @@
+syntax = "proto3";
+package examples;
+
+option java_package = "com.example.janrkrejci";
+import "google/protobuf/timestamp.proto";
+
+service BookService {
+  rpc Search(BookSearchRequest) returns (stream Book);
+  rpc Get(BookId) returns (Book);
+  rpc Create(BookInfo) returns (Book);
+  rpc Delete(BookId) returns (Empty);
+}
+
+message BookInfo {
+  string name = 1;
+  string isbn = 2;
+  google.protobuf.Timestamp release_date = 3;
+  repeated string authors = 4;
+}
+
+message BookSearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+
+message Book {
+  BookId book_id = 1;
+  BookInfo book = 2;
+}
+
+message BookId {
+  int32 book_id = 1;
+}
+
+message Empty {}
+

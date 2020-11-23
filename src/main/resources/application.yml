@@ -1,0 +1,22 @@
+micronaut:
+  application:
+    name: grpcMicronautCrud
+
+grpc:
+  server:
+    port: 8080
+  health:
+    enabled: true
+
+cassandra:
+  default:
+    advanced:
+      metadata:
+        schema:
+          enabled: false
+    basic:
+      contact-points:
+        - "127.0.0.1:9042"
+        - "127.0.0.1:9043"
+      load-balancing-policy:
+        local-datacenter: DC1
