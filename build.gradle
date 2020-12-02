@@ -1,7 +1,7 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.3.72"
-    id "org.jetbrains.kotlin.kapt" version "1.3.72"
-    id "org.jetbrains.kotlin.plugin.allopen" version "1.3.72"
+    id "org.jetbrains.kotlin.jvm" version "1.4.20"
+    id "org.jetbrains.kotlin.kapt" version "1.4.20"
+    id "org.jetbrains.kotlin.plugin.allopen" version "1.4.20"
     id "application"
     id 'com.google.protobuf' version '0.8.14'
 }
@@ -21,15 +21,21 @@ configurations {
 
 dependencies {
     kapt(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
+    kapt(enforcedPlatform("io.micronaut.data:micronaut-data-bom:$micronautData"))
 
     kapt("io.micronaut:micronaut-inject-java")
     kapt("io.micronaut:micronaut-validation")
+    kapt("io.micronaut.data:micronaut-data-processor")
+    kapt("com.datastax.oss:java-driver-mapper-processor:4.9.0")
 
+    api("com.datastax.oss:java-driver-mapper-runtime")
+    implementation("io.micronaut.data:micronaut-data-hibernate-jpa")
     implementation(enforcedPlatform("io.micronaut:micronaut-bom:$micronautVersion"))
     implementation(enforcedPlatform("org.jetbrains.kotlin:kotlin-bom:$kotlinJetbrainsVersion"))
 //    implementation(enforcedPlatform("org.jetbrains.kotlinx:kotlinx-coroutines-bom:$kotlinJetbrainsCorouVersion"))
     implementation("io.micronaut.cassandra:micronaut-cassandra:3.1.0")
-    implementation("io.micronaut:micronaut-management")
+    api("io.micronaut:micronaut-management")
+    implementation("io.micronaut:micronaut-http-server-netty")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinJetbrainsCorouVersion")
